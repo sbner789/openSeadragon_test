@@ -1,51 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from "../viewer/openseadragon/openseadragon";
 import TestImage from "../test_image/test_image1.jpg";
 
 const Annotation = () => {
-    const [viewer, setViewer] = useState(null);
-    const InitOpenSeadragon = () => {
-        viewer && viewer.destroy();
-        setViewer(
-            OpenSeadragon({
-                id: 'openSeaDragon1',
-                animationTime: 0.5,
-                blendTime: 0.1,
-                constrainDuringPan: true,
-                maxZoomPixelRatio: 2,
-                minZoomLevel: 1,
-                visibilityRatio: 1,
-                zoomPerScroll: 2,
-                tileSources: {
-                    type: "legacy-image-pyramid",
-                    levels: [
-                        {
-                            url: TestImage,
-                            width: 3840,
-                            height: 2160,
-                        }
-                    ]
-                }
-            })
-        )
-    }
+    // const [viewer, setViewer] = useState(null);
+    // const InitOpenSeadragon = () => {
+    //     viewer && viewer.destroy();
+    //     setViewer(
+    //         OpenSeadragon({
+    //             id: "openSeaDragon",
+    //             animationTime: 0.5,
+    //             blendTime: 0.1,
+    //             constrainDuringPan: true,
+    //             maxZoomPixelRatio: 2,
+    //             minZoomLevel: 1,
+    //             visibilityRatio: 1,
+    //             zoomPerScroll: 2,
+    //             tileSources: {
+    //                 type: "image",
+    //                 levels: [
+    //                     {
+    //                         url: TestImage,
+    //                         width: 3840,
+    //                         height: 2160,
+    //                     }
+    //                 ]
+    //             },
+    //         })
+    //     )
+    // }
 
     useEffect(() => {
-        InitOpenSeadragon();
+        const viewer = OpenSeadragon({
+            id: "openSeaDragon",
+            tileSources: {
+                type: 'image',
+                url: TestImage
+            }
+        })
+
         return () => {
-            viewer && viewer.destroy();
+            viewer.destroy();
         }
-    }, []);
+    });
 
     return (
         <div 
-            id='openSeaDragon1' 
+            id="openSeaDragon"
             style={{
                 width: "1200px",
                 height: "800px"
             }}
-        >
-        </div>
+        />
     )
 }
 export default Annotation

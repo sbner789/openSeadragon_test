@@ -569,14 +569,14 @@
   *     Note: {@link OpenSeadragon.Options.showNavigationControl} is overriding
   *     this setting when set to false.
   *
-  * @property {Boolean} [showRotationControl=true]
+  * @property {Boolean} [showRotationControl=false]
   *     If true then the rotate left/right controls will be displayed as part of the
   *     standard controls. This is also subject to the browser support for rotate
   *     (e.g. viewer.drawer.canRotate()).<br>
   *     Note: {@link OpenSeadragon.Options.showNavigationControl} is overriding
   *     this setting when set to false.
   *
-  * @property {Boolean} [showFlipControl=true]
+  * @property {Boolean} [showFlipControl=false]
   *     If true then the flip controls will be displayed as part of the
   *     standard controls.
   *
@@ -1341,8 +1341,8 @@ function OpenSeadragon( options ){
             showZoomControl:         true,  //ZOOM
             showHomeControl:         true,  //HOME
             showFullPageControl:     true,  //FULL
-            showRotationControl:     true, //ROTATION
-            showFlipControl:         true,  //FLIP
+            showRotationControl:     false, //ROTATION
+            showFlipControl:         false,  //FLIP
             controlsFadeDelay:       2000,  //ZOOM/HOME/FULL/SEQUENCE
             controlsFadeLength:      1500,  //ZOOM/HOME/FULL/SEQUENCE
             mouseNavEnabled:         true,  //GENERAL MOUSE INTERACTIVITY
@@ -9867,14 +9867,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.ZoomIn" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.zoomIn.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.zoomIn.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.zoomIn.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.zoomIn.DOWN ),
-                    srcRest:    require("./images/zoomin_rest.png"),
-                    srcGroup:   require("./images/zoomin_grouphover.png"),
-                    srcHover:   require("./images/zoomin_hover.png"),
-                    srcDown:    require("./images/zoomin_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.zoomIn.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.zoomIn.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.zoomIn.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.zoomIn.DOWN ),
                     onPress:    beginZoomingInHandler,
                     onRelease:  endZoomingHandler,
                     onClick:    doSingleZoomInHandler,
@@ -9889,14 +9885,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.ZoomOut" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.zoomOut.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.zoomOut.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.zoomOut.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.zoomOut.DOWN ),
-                    srcRest:    require("./images/zoomout_rest.png"),
-                    srcGroup:   require("./images/zoomout_grouphover.png"),
-                    srcHover:   require("./images/zoomout_hover.png"),
-                    srcDown:    require("./images/zoomout_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.zoomOut.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.zoomOut.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.zoomOut.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.zoomOut.DOWN ),
                     onPress:    beginZoomingOutHandler,
                     onRelease:  endZoomingHandler,
                     onClick:    doSingleZoomOutHandler,
@@ -9913,14 +9905,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.Home" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.home.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.home.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.home.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.home.DOWN ),
-                    srcRest:    require("./images/home_rest.png"),
-                    srcGroup:   require("./images/home_grouphover.png"),
-                    srcHover:   require("./images/home_hover.png"),
-                    srcDown:    require("./images/home_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.home.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.home.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.home.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.home.DOWN ),
                     onRelease:  onHomeHandler,
                     onFocus:    onFocusHandler,
                     onBlur:     onBlurHandler
@@ -9933,14 +9921,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.FullPage" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.fullpage.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.fullpage.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.fullpage.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.fullpage.DOWN ),
-                    srcRest:    require("./images/fullpage_rest.png"),
-                    srcGroup:   require("./images/fullpage_grouphover.png"),
-                    srcHover:   require("./images/fullpage_hover.png"),
-                    srcDown:    require("./images/fullpage_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.fullpage.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.fullpage.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.fullpage.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.fullpage.DOWN ),
                     onRelease:  onFullScreenHandler,
                     onFocus:    onFocusHandler,
                     onBlur:     onBlurHandler
@@ -9953,14 +9937,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.RotateLeft" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.rotateleft.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.rotateleft.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.rotateleft.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.rotateleft.DOWN ),
-                    srcRest:    require("./images/rotateleft_rest.png"),
-                    srcGroup:   require("./images/rotateleft_grouphover.png"),
-                    srcHover:   require("./images/rotateleft_hover.png"),
-                    srcDown:    require("./images/rotateleft_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.rotateleft.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.rotateleft.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.rotateleft.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.rotateleft.DOWN ),
                     onRelease:  onRotateLeftHandler,
                     onFocus:    onFocusHandler,
                     onBlur:     onBlurHandler
@@ -9971,14 +9951,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.RotateRight" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.rotateright.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.rotateright.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.rotateright.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.rotateright.DOWN ),
-                    srcRest:    require("./images/rotateright_rest.png"),
-                    srcGroup:   require("./images/rotateright_grouphover.png"),
-                    srcHover:   require("./images/rotateright_hover.png"),
-                    srcDown:    require("./images/rotateright_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.rotateright.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.rotateright.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.rotateright.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.rotateright.DOWN ),
                     onRelease:  onRotateRightHandler,
                     onFocus:    onFocusHandler,
                     onBlur:     onBlurHandler
@@ -9991,14 +9967,10 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
                     clickTimeThreshold: this.clickTimeThreshold,
                     clickDistThreshold: this.clickDistThreshold,
                     tooltip:    $.getString( "Tooltips.Flip" ),
-                    // srcRest:    resolveUrl( this.prefixUrl, navImages.flip.REST ),
-                    // srcGroup:   resolveUrl( this.prefixUrl, navImages.flip.GROUP ),
-                    // srcHover:   resolveUrl( this.prefixUrl, navImages.flip.HOVER ),
-                    // srcDown:    resolveUrl( this.prefixUrl, navImages.flip.DOWN ),
-                    srcRest:    require("./images/flip_rest.png"),
-                    srcGroup:   require("./images/flip_grouphover.png"),
-                    srcHover:   require("./images/flip_hover.png"),
-                    srcDown:    require("./images/flip_pressed.png"),
+                    srcRest:    resolveUrl( this.prefixUrl, navImages.flip.REST ),
+                    srcGroup:   resolveUrl( this.prefixUrl, navImages.flip.GROUP ),
+                    srcHover:   resolveUrl( this.prefixUrl, navImages.flip.HOVER ),
+                    srcDown:    resolveUrl( this.prefixUrl, navImages.flip.DOWN ),
                     onRelease:  onFlipHandler,
                     onFocus:    onFocusHandler,
                     onBlur:     onBlurHandler
