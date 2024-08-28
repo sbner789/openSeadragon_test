@@ -1,1 +1,0 @@
-# openSeadragon_test
