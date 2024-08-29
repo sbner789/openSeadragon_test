@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import OpenSeadragon from "../viewer/openseadragon/openseadragon";
 import TestImage from "../test_image/test_image1.jpg";
+import Minji from "../test_image/newjeans-minji.jpg";
 import zoomInRest from "../viewer/openseadragon/images/zoomin_rest.png";
 import zoomInGroup from "../viewer/openseadragon/images/zoomin_grouphover.png";
 import zoomInHover from "../viewer/openseadragon/images/zoomin_hover.png";
@@ -29,8 +30,26 @@ import flipRest from "../viewer/openseadragon/images/flip_rest.png";
 import flipGroup from "../viewer/openseadragon/images/flip_grouphover.png";
 import flipHover from "../viewer/openseadragon/images/flip_hover.png";
 import flipDown from "../viewer/openseadragon/images/flip_pressed.png";
+import prevRest from "../viewer/openseadragon/images/previous_rest.png";
+import prevGroup from "../viewer/openseadragon/images/previous_grouphover.png";
+import prevHover from "../viewer/openseadragon/images/previous_hover.png";
+import prevDown from "../viewer/openseadragon/images/previous_pressed.png";
+import nextRest from "../viewer/openseadragon/images/next_rest.png";
+import nextGroup from "../viewer/openseadragon/images/next_grouphover.png";
+import nextHover from "../viewer/openseadragon/images/next_hover.png";
+import nextDown from "../viewer/openseadragon/images/next_pressed.png";
 
 const Annotation = () => {
+    const images = [
+        {
+            type: "image",
+            url: TestImage
+        },
+        {
+            type: "image",
+            url: Minji
+        }
+    ]
     
     useEffect(() => {
         const viewer = OpenSeadragon({
@@ -47,12 +66,12 @@ const Annotation = () => {
             navigatorLeft: "4px",
             navigatorHeight: "120px",
             navigatorWidth: "145px",
-            tileSources: {
-                type: 'image',
-                url: TestImage
-            },
+            tileSources: images,
             showRotationControl : true,
             showFlipControl : true,
+            sequenceMode: true,
+            showReferenceStrip: true,
+            referenceStripSizeRatio: 0.1,
             tooltipIcons : {
                 zoomInRest : zoomInRest,
                 zoomInGroup : zoomInGroup,
@@ -81,8 +100,23 @@ const Annotation = () => {
                 flipRest : flipRest,
                 flipGroup : flipGroup,
                 flipHover : flipHover,
-                flipDown : flipDown
+                flipDown : flipDown,
+                prevRest : prevRest,
+                prevGroup : prevGroup,
+                prevHover : prevHover,
+                prevDown : prevDown,
+                nextRest : nextRest,
+                nextGroup : nextGroup,
+                nextHover : nextHover,
+                nextDown : nextDown 
             },
+        })
+
+        viewer.addHandler('canvas-click', function(event) {
+            let webPoint = event.position;
+            let viewportPoint = viewer.viewport.pointFromPixel(webPoint);
+            let imagePoint = viewer.viewport.viewportToImageCoordinates(viewportPoint);
+            console.log(webPoint.toString(), viewportPoint.toString(), imagePoint.toString());
         })
 
         return () => {
@@ -91,13 +125,15 @@ const Annotation = () => {
     });
 
     return (
-        <div 
-            id="openSeaDragon"
-            style={{
-                width: "1200px",
-                height: "800px"
-            }}
-        />
+        <>
+            <div 
+                id="openSeaDragon"
+                style={{
+                    width: "1280px",
+                    height: "960px"
+                }}
+            />
+        </>    
     )
 }
 export default Annotation
