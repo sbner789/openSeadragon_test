@@ -38,6 +38,7 @@ import nextRest from "../viewer/openseadragon/images/next_rest.png";
 import nextGroup from "../viewer/openseadragon/images/next_grouphover.png";
 import nextHover from "../viewer/openseadragon/images/next_hover.png";
 import nextDown from "../viewer/openseadragon/images/next_pressed.png";
+import "../assets/test.css";
 
 const Annotation = () => {
     const images = [
@@ -110,6 +111,14 @@ const Annotation = () => {
                 nextHover : nextHover,
                 nextDown : nextDown 
             },
+            overlays: [{
+                id : "overlays-rect",
+                x: 0.3,
+                y: 0.16,
+                width: 0.1,
+                height: 0.1,
+                className:"highlight"
+            }]
         })
 
         viewer.addHandler('canvas-click', function(event) {
