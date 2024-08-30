@@ -39,6 +39,7 @@ import nextGroup from "../viewer/openseadragon/images/next_grouphover.png";
 import nextHover from "../viewer/openseadragon/images/next_hover.png";
 import nextDown from "../viewer/openseadragon/images/next_pressed.png";
 import "../assets/test.css";
+import OpenSeadragonAnnotations from "../viewer/annotations/views/Control";
 
 const Annotation = () => {
     const images = [
@@ -51,7 +52,7 @@ const Annotation = () => {
             url: Minji
         }
     ]
-    
+
     useEffect(() => {
         const viewer = OpenSeadragon({
             id: "openSeaDragon",
@@ -71,8 +72,8 @@ const Annotation = () => {
             showRotationControl : true,
             showFlipControl : true,
             sequenceMode: true,
-            showReferenceStrip: true,
-            referenceStripSizeRatio: 0.1,
+            // showReferenceStrip: true,
+            // referenceStripSizeRatio: 0.1,
             tooltipIcons : {
                 zoomInRest : zoomInRest,
                 zoomInGroup : zoomInGroup,
@@ -111,14 +112,14 @@ const Annotation = () => {
                 nextHover : nextHover,
                 nextDown : nextDown 
             },
-            overlays: [{
-                id : "overlays-rect",
-                x: 0.3,
-                y: 0.16,
-                width: 0.1,
-                height: 0.1,
-                className:"highlight"
-            }]
+            // overlays: [{
+            //     id : "overlays-rect",
+            //     x: 0.3,
+            //     y: 0.16,
+            //     width: 0.1,
+            //     height: 0.1,
+            //     className:"highlight"
+            // }]
         })
 
         viewer.addHandler('canvas-click', function(event) {
@@ -128,7 +129,23 @@ const Annotation = () => {
             console.log(webPoint.toString(), viewportPoint.toString(), imagePoint.toString());
         })
 
+        // const customAnnotations = new OpenSeadragonAnnotations({
+        //     viewer: viewer,
+        //     showControls: true,
+        //     allowEditing: true,
+        //     annotations: [
+        //         {
+        //             id: '1',
+        //             type: 'rect',
+        //             geometry: { x: 0.1, y: 0.1, width: 0.3, height: 0.3 },
+        //             style: { color: 'red' },
+        //             text: 'This is a rectangle annotation',
+        //         },
+        //     ]
+        // })
+
         return () => {
+            // customAnnotations.destroy()
             viewer.destroy();
         }
     });
