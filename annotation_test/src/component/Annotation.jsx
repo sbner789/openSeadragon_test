@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import OpenSeadragon from "../viewer/openseadragon/openseadragon";
 import TestImage from "../test_image/test_image1.jpg";
 import Minji from "../test_image/newjeans-minji.jpg";
@@ -41,108 +41,106 @@ import nextDown from "../viewer/openseadragon/images/next_pressed.png";
 import "../assets/test.css";
 
 const Annotation = () => {
-    const images = [
+  const viewerRef = useRef(null);
+  const images = [
+    {
+      type: "image",
+      url: TestImage,
+    },
+    {
+      type: "image",
+      url: Minji,
+    },
+  ];
+
+  useEffect(() => {
+    const viewer = OpenSeadragon({
+      // id: "openSeaDragon",
+      element: viewerRef.current,
+      animationTime: 0.5,
+      blendTime: 0.1,
+      constrainDuringPan: true,
+      maxZoomPixelRatio: 2,
+      minZoomLevel: 1,
+      zoomPerScroll: 2,
+      showNavigator: true,
+      navigatorPosition: "ABSOLUTE",
+      navigatorTop: "40px",
+      navigatorLeft: "4px",
+      navigatorHeight: "120px",
+      navigatorWidth: "145px",
+      tileSources: images,
+      showRotationControl: true,
+      showFlipControl: true,
+      sequenceMode: true,
+      showReferenceStrip: true,
+      referenceStripSizeRatio: 0.1,
+      tooltipIcons: {
+        zoomInRest: zoomInRest,
+        zoomInGroup: zoomInGroup,
+        zoomInHover: zoomInHover,
+        zoomInDown: zoomInDown,
+        zoomOutRest: zoomOutRest,
+        zoomOutGroup: zoomOutGroup,
+        zoomOutHover: zoomOutHover,
+        zoomOutDown: zoomOutDown,
+        homeRest: homeRest,
+        homeGroup: homeGroup,
+        homeHover: homeHover,
+        homeDown: homeDown,
+        fullPageRest: fullPageRest,
+        fullPageGroup: fullPageGroup,
+        fullPageHover: fullPageHover,
+        fullPageDown: fullPageDown,
+        rotateLeftRest: rotateLeftRest,
+        rotateLeftGroup: rotateLeftGroup,
+        rotateLeftHover: rotateLeftHover,
+        rotateLeftDown: rotateLeftDown,
+        rotateRightRest: rotateRightRest,
+        rotateRightGroup: rotateRightGroup,
+        rotateRightHover: rotateRightHover,
+        rotateRightDown: rotateRightDown,
+        flipRest: flipRest,
+        flipGroup: flipGroup,
+        flipHover: flipHover,
+        flipDown: flipDown,
+        prevRest: prevRest,
+        prevGroup: prevGroup,
+        prevHover: prevHover,
+        prevDown: prevDown,
+        nextRest: nextRest,
+        nextGroup: nextGroup,
+        nextHover: nextHover,
+        nextDown: nextDown,
+      },
+      overlays: [
         {
-            type: "image",
-            url: TestImage
+          id: "overlays-rect",
+          x: 0.3,
+          y: 0.16,
+          width: 0.1,
+          height: 0.1,
+          className: "highlight",
         },
-        {
-            type: "image",
-            url: Minji
-        }
-    ]
-
-    useEffect(() => {
-        const viewer = OpenSeadragon({
-            id: "openSeaDragon",
-            animationTime: 0.5,
-            blendTime: 0.1,
-            constrainDuringPan: true,
-            maxZoomPixelRatio: 2,
-            minZoomLevel: 1,
-            zoomPerScroll: 2,
-            showNavigator: true,
-            navigatorPosition: "ABSOLUTE",
-            navigatorTop: "40px",
-            navigatorLeft: "4px",
-            navigatorHeight: "120px",
-            navigatorWidth: "145px",
-            tileSources: images,
-            showRotationControl : true,
-            showFlipControl : true,
-            sequenceMode: true,
-            showReferenceStrip: true,
-            referenceStripSizeRatio: 0.1,
-            tooltipIcons : {
-                zoomInRest : zoomInRest,
-                zoomInGroup : zoomInGroup,
-                zoomInHover : zoomInHover,
-                zoomInDown : zoomInDown,
-                zoomOutRest : zoomOutRest,
-                zoomOutGroup : zoomOutGroup,
-                zoomOutHover : zoomOutHover,
-                zoomOutDown : zoomOutDown,
-                homeRest : homeRest,
-                homeGroup : homeGroup,
-                homeHover : homeHover,
-                homeDown : homeDown,
-                fullPageRest : fullPageRest,
-                fullPageGroup : fullPageGroup,
-                fullPageHover : fullPageHover,
-                fullPageDown : fullPageDown,
-                rotateLeftRest : rotateLeftRest,
-                rotateLeftGroup : rotateLeftGroup,
-                rotateLeftHover : rotateLeftHover,
-                rotateLeftDown : rotateLeftDown,
-                rotateRightRest : rotateRightRest,
-                rotateRightGroup : rotateRightGroup,
-                rotateRightHover : rotateRightHover,
-                rotateRightDown : rotateRightDown,
-                flipRest : flipRest,
-                flipGroup : flipGroup,
-                flipHover : flipHover,
-                flipDown : flipDown,
-                prevRest : prevRest,
-                prevGroup : prevGroup,
-                prevHover : prevHover,
-                prevDown : prevDown,
-                nextRest : nextRest,
-                nextGroup : nextGroup,
-                nextHover : nextHover,
-                nextDown : nextDown 
-            },
-            // overlays: [{
-            //     id : "overlays-rect",
-            //     x: 0.3,
-            //     y: 0.16,
-            //     width: 0.1,
-            //     height: 0.1,
-            //     className:"highlight"
-            // }]
-        })
-
-        viewer.addHandler('canvas-click', function(event) {
-            let webPoint = event.position;
-            let viewportPoint = viewer.viewport.pointFromPixel(webPoint);
-            let imagePoint = viewer.viewport.viewportToImageCoordinates(viewportPoint);
-            console.log(webPoint.toString(), viewportPoint.toString(), imagePoint.toString());
-        })
-
-        return () => {
-            viewer.destroy();
-        }
+      ],
     });
 
-    return (
-        <>
-            <div 
-                id="openSeaDragon"
-                style={{
-                    width: "1280px",
-                    height: "960px"
-                }}
-            />
-        </>    
-    )
-}
-export default Annotation
+    return () => {
+      viewer.destroy();
+    };
+  });
+
+  return (
+    <div>
+      <div
+        // id="openSeaDragon"
+        ref={viewerRef}
+        style={{
+          width: "1280px",
+          height: "960px",
+        }}
+      />
+    </div>
+  );
+};
+export default Annotation;
